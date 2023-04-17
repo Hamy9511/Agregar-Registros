@@ -1,3 +1,4 @@
+(() => {
 const btn = document.querySelector("[data-form-btn]");
 
 const  createTask = (evento) =>{ //Arrow function o Funciones anonimas  //Liatener para el boton agregar
@@ -19,15 +20,22 @@ const  createTask = (evento) =>{ //Arrow function o Funciones anonimas  //Liaten
         const content = `<i class="fas fa-trash-alt trashIcon icon"></i>`
         task.appendChild(taskContent);
         list.appendChild(task);
-        console.log(content);
     }
 
 btn.addEventListener("click", createTask); //Lllamando a la funcion para hacer el listener
 
 const checkComplete = () => {
     const i = document.createElement("i");
-    i.classList.add("far");
-    i.classList.add("fa-check-square");
-    i.classList.add("icon");
+    i.classList.add("far", "fa-check-square", "icon" ); //icono de checklist
+    i.addEventListener("click", completeTask); //Evento de click en el boton del icono del checklist
     return i;
 }
+
+//Inmediately invoke function expression IIFE
+const completeTask = () =>{ //funcion para reemplazar la palomita del checklist
+    const element = event.target; 
+    element.classList.toggle("fas"); //toggle es una funcion de si exite la quita y si no exite la pone
+    element.classList.toggle("completeIcon");
+    element.classList.toggle("far");
+}
+})();
