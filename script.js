@@ -17,8 +17,8 @@ const  createTask = (evento) =>{ //Arrow function o Funciones anonimas  //Liaten
         titleTask.classList.add("task"); //Lo llamo con el id task
         titleTask.innerText = value; //inserto en el span el valor de value
         taskContent.appendChild(titleTask);
-        const content = `<i class="fas fa-trash-alt trashIcon icon"></i>`
         task.appendChild(taskContent);
+        task.appendChild(deleteIcon());
         list.appendChild(task);
     }
 
@@ -32,10 +32,26 @@ const checkComplete = () => {
 }
 
 //Inmediately invoke function expression IIFE
-const completeTask = () =>{ //funcion para reemplazar la palomita del checklist
+const completeTask = () =>{ //funcion para reemplazar la palomita del checklist al darle click a nuestro elemnto checkcomplete
     const element = event.target; 
     element.classList.toggle("fas"); //toggle es una funcion de si exite la quita y si no exite la pone
     element.classList.toggle("completeIcon");
     element.classList.toggle("far");
 }
+
+const deleteIcon = () => {
+    const i = document.createElement("i");
+    i.classList.add("fas","fa-trash-alt","trashicon", "icon"); //agregar icono dd e delete
+    i.addEventListener("click", deleteTask); //Listener de un click abre la funcion deleteTask
+    return i;
+}
+
+const deleteTask = (event) =>{
+    console.log("EliinarTarea");
+    //console.log(event.target.parentElement); //para vwerificar el padre de mi elemento o evento
+    const parent = event.target.parentElement; //asiganmos variable al elemento padre
+    parent.remove();
+
+}
+
 })();
